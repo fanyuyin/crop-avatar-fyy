@@ -121,3 +121,5 @@ body {
   filter: alpha(opacity=75);
   z-index: 20140628;
 }
+#preview-md{ margin-top: 15px;}
+#preview-md img{width: 100px; height: 100px;border-radius: 3px;}
