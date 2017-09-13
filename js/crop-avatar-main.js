@@ -220,13 +220,13 @@
                         var canvas = $canvas[0];
                         canvas.width = width;
                         canvas.height = height;
-                        var cxt=canvas.getContext('2d');
-                        cxt.drawImage(
+                        var ctx=canvas.getContext('2d');
+                        ctx.translate(e.x + width / 2,  e.y + height / 2);
+                        ctx.rotate(e.rotate * Math.PI / 180);
+                        ctx.drawImage(
                             this,
-                            e.x, e.y, width, height,
-                            0, 0, width, height
+                            -(width/2+e.x), -(height/2+e.y),width,height
                         );
-
                         var rectImage = document.createElement('img');
                         rectImage.src = canvas.toDataURL('image/jpeg');
                         _this.$avatarPreviewmd.html('').append(rectImage);
