@@ -225,7 +225,7 @@
                         ctx.rotate(e.rotate * Math.PI / 180);
                         ctx.drawImage(
                             this,
-                            -(width/2+e.x), -(height/2+e.y),width,height
+                            -(width/2+e.x), -(height/2+e.y), width, height
                         );
                         var rectImage = document.createElement('img');
                         rectImage.src = canvas.toDataURL('image/jpeg');
