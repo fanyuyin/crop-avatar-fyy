@@ -204,35 +204,11 @@
                 this.$img.cropper({
                     aspectRatio: 1,
                     preview: this.$avatarPreview.selector,
-                    crop: function (e) {
-                        var json = [
-                            '{"x":' + e.x,
-                            '"y":' + e.y,
-                            '"height":' + e.height,
-                            '"width":' + e.width,
-                            '"rotate":' + e.rotate + '}'
-                        ].join();
-                        _this.$avatarData.val(json);
+                    crop: function () {
+                        _this.urlCanvas();
 
-                        var width = e.width;
-                        var height = e.height;
-                        var $canvas = _this.$previewCanvas;
-                        var canvas = $canvas[0];
-                        canvas.width = width;
-                        canvas.height = height;
-                        var ctx=canvas.getContext('2d');
-                        ctx.translate(e.x + width / 2,  e.y + height / 2);
-                        ctx.rotate(e.rotate * Math.PI / 180);
-                        ctx.drawImage(
-                            this,
-                            -(width/2+e.x), -(height/2+e.y), width, height
-                        );
-                        var rectImage = document.createElement('img');
-                        rectImage.src = canvas.toDataURL('image/jpeg');
-                        _this.$avatarPreviewmd.html('').append(rectImage);
-                    },
+                    }
                 });
-
 
 
                 this.active = true;
@@ -243,7 +219,12 @@
                 _this.stopCropper();
             });
         },
-
+        urlCanvas:function(){
+            var dataurl = this.$img.cropper("getCroppedCanvas");
+            var rectImage = document.createElement('img');
+            rectImage.src = dataurl.toDataURL('image/jpeg');
+            this.$avatarPreviewmd.html('').append(rectImage);
+        },
         stopCropper: function () {
             if (this.active) {
                 this.$img.cropper('destroy');
